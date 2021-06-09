@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.1 (Python 3.6.5 on win32)" generated="20210517 16:01:04.607" rpa="false" schemaversion="2">
+<suite id="s1" name="Get Request" source="C:\development\robot-scripts\apitest\get_request.robot">
+<test id="s1-t1" name="TC_01_Get Request">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${Base_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210517 16:01:05.084" level="INFO">Creating Session using : alias=mysession, url=https://lmsmanager-test.colorado.edu/LMSManager/rest/queries/bsoCoursesCreatedInLms, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210517 16:01:05.083" endtime="20210517 16:01:05.084"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>?term5=${term}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210517 16:01:05.085" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210517 16:01:05.501" level="INFO">GET Request : url=https://lmsmanager-test.colorado.edu/LMSManager/rest/queries/bsoCoursesCreatedInLms?term5=20211 
+ path_url=/LMSManager/rest/queries/bsoCoursesCreatedInLms?term5=20211 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210517 16:01:05.501" level="INFO">GET Response : url=https://lmsmanager-test.colorado.edu/LMSManager/rest/queries/bsoCoursesCreatedInLms?term5=20211 
+ status=200, reason=200 
+ headers={'Date': 'Mon, 17 May 2021 22:01:05 GMT', 'Vary': 'Origin', 'Strict-Transport-Security': 'max-age=63072000;', 'Content-Type': 'application/json', 'Content-Length': '659', 'Connection': 'close'} 
+ body=["100478-01-BSO-640F-section-43090","101594-01-BSO-640F-section-43083","101686-01-BSO-640F-section-43088","103464-01-BSO-640F-section-43091","103464-01-BSO-642-section-43077","107641-01-BSO-641-section-43078","107642-01-BSO-640-section-43079","108161-01-BSO-640F-section-43087","113841-01-BSO-640F-section-43085","113889-01-BSO-640F-section-43089","115102-01-BSO-640F-section-43082","115110-01-BSO-640-section-43075","115114-01-BSO-640-section-43080","115114-01-BSO-640F-section-43096","115149-01-BSO-640F-section-43086","115164-01-BSO-640F-section-43097","115164-01-BSO-641-section-43081","116007-01-BSO-640-section-43076","116033-01-BSO-640F-section-43084"] 
+ </msg>
+<msg timestamp="20210517 16:01:05.501" level="INFO">c:\users\anan4615\python\python36\lib\site-packages\urllib3\connectionpool.py:1004: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20210517 16:01:05.502" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210517 16:01:05.085" endtime="20210517 16:01:05.502"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210517 16:01:05.503" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210517 16:01:05.503" endtime="20210517 16:01:05.503"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210517 16:01:05.504" endtime="20210517 16:01:05.504"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${json_obj}</var>
+<arg>${response.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20210517 16:01:05.505" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20210517 16:01:05.507" level="INFO">To JSON using : content=["100478-01-BSO-640F-section-43090","101594-01-BSO-640F-section-43083","101686-01-BSO-640F-section-43088","103464-01-BSO-640F-section-43091","103464-01-BSO-642-section-43077","107641-01-BSO-641-section-43078","107642-01-BSO-640-section-43079","108161-01-BSO-640F-section-43087","113841-01-BSO-640F-section-43085","113889-01-BSO-640F-section-43089","115102-01-BSO-640F-section-43082","115110-01-BSO-640-section-43075","115114-01-BSO-640-section-43080","115114-01-BSO-640F-section-43096","115149-01-BSO-640F-section-43086","115164-01-BSO-640F-section-43097","115164-01-BSO-641-section-43081","116007-01-BSO-640-section-43076","116033-01-BSO-640F-section-43084"] </msg>
+<msg timestamp="20210517 16:01:05.507" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20210517 16:01:05.507" level="INFO">${json_obj} = ['100478-01-BSO-640F-section-43090', '101594-01-BSO-640F-section-43083', '101686-01-BSO-640F-section-43088', '103464-01-BSO-640F-section-43091', '103464-01-BSO-642-section-43077', '107641-01-BSO-641-s...</msg>
+<status status="PASS" starttime="20210517 16:01:05.505" endtime="20210517 16:01:05.507"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${response_count}</var>
+<arg>${json_obj}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20210517 16:01:05.508" level="INFO">Length is 19</msg>
+<msg timestamp="20210517 16:01:05.508" level="INFO">${response_count} = 19</msg>
+<status status="PASS" starttime="20210517 16:01:05.507" endtime="20210517 16:01:05.508"/>
+</kw>
+<kw name="Message Count" library="curl">
+<var>${Messages_Queue}</var>
+<msg timestamp="20210517 16:01:05.539" level="INFO">{'consumer_details': [], 'arguments': {'x-dead-letter-exchange': 'spring-boot-exchange', 'x-dead-letter-routing-key': 'dead.letter'}, 'auto_delete': False, 'backing_queue_status': {'avg_ack_egress_rate': 0.0, 'avg_ack_ingress_rate': 0.0, 'avg_egress_rate': 0.0, 'avg_ingress_rate': 0.0, 'delta': ['delta', 'undefined', 0, 0, 'undefined'], 'len': 64369, 'mode': 'default', 'next_seq_id': 64385, 'q1': 0, 'q2': 0, 'q3': 0, 'q4': 64369, 'target_ram_count': 'infinity'}, 'consumer_utilisation': None, 'consumers': 0, 'deliveries': [], 'durable': True, 'effective_policy_definition': {}, 'exclusive': False, 'exclusive_consumer_tag': None, 'garbage_collection': {'fullsweep_after': 65535, 'max_heap_size': 0, 'min_bin_vheap_size': 46422, 'min_heap_size': 233, 'minor_gcs': 3727}, 'head_message_timestamp': None, 'idle_since': '2021-05-17 22:00:10', 'incoming': [], 'memory': 56670908, 'message_bytes': 23041371, 'message_bytes_paged_out': 0, 'message_bytes_persistent': 23041371, 'message_bytes_ram': 23041371, 'message_bytes_ready': 23041371, 'message_bytes_unacknowledged': 0, 'message_stats': {'ack': 16, 'ack_details': {'rate': 0.0}, 'deliver': 514, 'deliver_details': {'rate': 0.0}, 'deliver_get': 535, 'deliver_get_details': {'rate': 0.0}, 'deliver_no_ack': 0, 'deliver_no_ack_details': {'rate': 0.0}, 'get': 21, 'get_details': {'rate': 0.0}, 'get_empty': 0, 'get_empty_details': {'rate': 0.0}, 'get_no_ack': 0, 'get_no_ack_details': {'rate': 0.0}, 'publish': 64385, 'publish_details': {'rate': 0.0}, 'redeliver': 270, 'redeliver_details': {'rate': 0.0}}, 'messages': 64369, 'messages_details': {'rate': 0.0}, 'messages_paged_out': 0, 'messages_persistent': 64369, 'messages_ram': 64369, 'messages_ready': 64369, 'messages_ready_details': {'rate': 0.0}, 'messages_ready_ram': 64369, 'messages_unacknowledged': 0, 'messages_unacknowledged_details': {'rate': 0.0}, 'messages_unacknowledged_ram': 0, 'name': 'auto-course-creation', 'node': 'rabbit@rabbitmq-spring', 'operator_policy': None, 'policy': None, 'recoverable_slaves': None, 'reductions': 3147850299, 'reductions_details': {'rate': 0.0}, 'single_active_consumer_tag': None, 'state': 'running', 'type': 'classic', 'vhost': '/'}
+Message status: 64369
+Queue is not empty</msg>
+<msg timestamp="20210517 16:01:05.540" level="INFO">${Messages_Queue} = Queue is not empty: 64369</msg>
+<status status="PASS" starttime="20210517 16:01:05.508" endtime="20210517 16:01:05.540"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${Messages_Queue}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210517 16:01:05.540" endtime="20210517 16:01:05.541"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${item}</var>
+<value>0</value>
+<value>${response_count}</value>
+<iter>
+<var name="${item}">0</var>
+<kw name="Convert To String" library="BuiltIn">
+<var>${section_id}</var>
+<arg>(${json_obj}[${item}])</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210517 16:01:05.542" level="INFO">${section_id} = (100478-01-BSO-640F-section-43090)</msg>
+<status status="PASS" starttime="20210517 16:01:05.542" endtime="20210517 16:01:05.542"/>
+</kw>
+<kw name="Remove String Using Regexp" library="String">
+<var>${SIS_ID}</var>
+<arg>${section_id}</arg>
+<arg>-section-\\d\\d\\d\\d\\d</arg>
+<doc>Removes ``patterns`` from the given ``string``.</doc>
+<msg timestamp="20210517 16:01:05.543" level="INFO">${SIS_ID} = (100478-01-BSO-640F)</msg>
+<status status="PASS" starttime="20210517 16:01:05.542" endtime="20210517 16:01:05.543"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${SIS_ID}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210517 16:01:05.543" endtime="20210517 16:01:05.544"/>
+</kw>
+<kw name="Canvas Login">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${Canvas_Login_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20210517 16:01:05.545" level="INFO">Opening browser 'headlesschrome' to base url 'https://cuboulder.test.instructure.com'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20210517 16:01:08.840" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20210517 16:01:08.840" endtime="20210517 16:01:08.840"/>
+</kw>
+<msg timestamp="20210517 16:01:08.852" level="FAIL">SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 87
+Current browser version is 90.0.4430.212 with binary path C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+</msg>
+<status status="FAIL" starttime="20210517 16:01:05.544" endtime="20210517 16:01:08.853"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=//input[@id='username']</arg>
+<arg>${User_Name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.853" endtime="20210517 16:01:08.853"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>xpath=//input[@id='password']</arg>
+<arg>${User_pwd}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.853" endtime="20210517 16:01:08.853"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=//div/button[contains(text(),'Continue')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.853" endtime="20210517 16:01:08.853"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.853" endtime="20210517 16:01:08.853"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.853" endtime="20210517 16:01:08.853"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id=global_nav_accounts_link</arg>
+<arg>timeout=0.5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.853" endtime="20210517 16:01:08.854"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=global_nav_accounts_link</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.854" endtime="20210517 16:01:08.854"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>link=University of Colorado Boulder</arg>
+<arg>timeout=0.5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.854" endtime="20210517 16:01:08.854"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>link=University of Colorado Boulder</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.854" endtime="20210517 16:01:08.854"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>xpath=//span/input[@placeholder="Search courses..."]</arg>
+<arg>timeout=0.5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.854" endtime="20210517 16:01:08.854"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=//span/input[@placeholder="Search courses..."]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.854" endtime="20210517 16:01:08.854"/>
+</kw>
+<status status="FAIL" starttime="20210517 16:01:05.544" endtime="20210517 16:01:08.854"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=//span/input[@placeholder="Search courses..."]</arg>
+<arg>${SIS_ID}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.854" endtime="20210517 16:01:08.855"/>
+</kw>
+<kw name="Page Should Not Contain" library="SeleniumLibrary">
+<arg>"No Courses found"</arg>
+<doc>Verifies the current page does not contain ``text``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.855" endtime="20210517 16:01:08.855"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${Canvas_SIS}</var>
+<arg>xpath=//div[@id='content']/div/table/tbody/tr/td[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.855" endtime="20210517 16:01:08.855"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${SIS_ID}</arg>
+<arg>${Canvas_SIS}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.855" endtime="20210517 16:01:08.855"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=//div[@id='content']/div/table/tbody/tr/td/a/span</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210517 16:01:08.855" endtime="20210517 16:01:08.855"/>
+</kw>
+<status status="FAIL" starttime="20210517 16:01:05.542" endtime="20210517 16:01:08.855"/>
+</iter>
+<status status="FAIL" starttime="20210517 16:01:05.542" endtime="20210517 16:01:08.855"/>
+</for>
+<status status="FAIL" starttime="20210517 16:01:05.082" endtime="20210517 16:01:08.856">SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 87
+Current browser version is 90.0.4430.212 with binary path C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+</status>
+</test>
+<status status="FAIL" starttime="20210517 16:01:04.609" endtime="20210517 16:01:08.858"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Get Request">Get Request</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210517 16:01:04.743" level="ERROR">Error in file 'C:\development\robot-scripts\apitest\get_request.robot' on line 4: Importing library 'HttpLibrary' failed: SyntaxError: invalid syntax (__init__.py, line 16)
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\anan4615\Python\Python36\Scripts\robot.exe
+  c:\users\anan4615\python\python36\python36.zip
+  c:\users\anan4615\python\python36\DLLs
+  c:\users\anan4615\python\python36\lib
+  c:\users\anan4615\python\python36
+  c:\users\anan4615\python\python36\lib\site-packages</msg>
+<msg timestamp="20210517 16:01:05.024" level="ERROR">Error in file 'C:\development\robot-scripts\apitest\get_request.robot' on line 8: Importing library 'ExtendedSelenium2Library' failed: ModuleNotFoundError: No module named 'ExtendedSelenium2Library'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\anan4615\Python\Python36\Scripts\robot.exe
+  c:\users\anan4615\python\python36\python36.zip
+  c:\users\anan4615\python\python36\DLLs
+  c:\users\anan4615\python\python36\lib
+  c:\users\anan4615\python\python36
+  c:\users\anan4615\python\python36\lib\site-packages</msg>
+<msg timestamp="20210517 16:01:05.085" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210517 16:01:05.505" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+</errors>
+</robot>

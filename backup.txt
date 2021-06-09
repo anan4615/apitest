@@ -1,0 +1,135 @@
+*** Settings ***
+Library  RequestsLibrary
+Library  Collections
+Library   HttpLibrary
+Library  JSONLibrary
+Library  String
+
+
+
+*** Variables ***
+#${Base_URL}  https://datausa.io/api/data
+${Base_URL} =  https://lmsmanager-test.colorado.edu/LMSManager/rest/queries/bsoCoursesCreatedInLms
+${term} =     20211
+#@{ALLOWED}=  Create List  /208235  /208231  /208229
+
+*** Keywords ***
+
+
+
+*** Test Cases ***
+TC_01_Get Request
+
+    create session  get_course_details     ${Base_URL}
+
+
+    #For multiple activity types create a list like this @{valid_activity_type}=    Create List  Population  Year  Nation
+
+    ${response}=     get request     get_course_details     ?term5=${term}
+    # if there are 2 parameters with and use this format ${response}=     get request     get_course_details     ?drilldowns=${drilldowns}&measures=${measures}
+    # if you need to run your API for different parameter values like activity types use this  :FOR    ${item}   IN RANGE   0    ${listlen}
+    #      \  ${response}=     get request     get_course_details     ?drilldowns=${drilldowns}&measures=@{valid_activity_type}[${item}]
+    #      \  log to console     ${response.content}
+    #log to console      ${response.status_code}
+
+    #log to console  ${response.content}
+
+
+    ${json_obj} =  to json  ${response.content}
+
+
+
+     ${response_count}=   Get Length  ${json_obj}
+
+    FOR   ${item}   IN RANGE   0    ${response_count}
+
+           ${section_id} =  convert to string  (${json_obj}[${item}])
+           log to console  ${section_id}
+           ${SIS_ID} =    remove string using regexp     ${section_id}      -section-\\d\\d\\d\\d\\d
+           log to console  ${SIS_ID}
+    END
+
+
+
+
+########################################################sample #####################################################
+
+
+
+
+*** Settings ***
+Library  RequestsLibrary
+Library  Collections
+Library   HttpLibrary
+Library  JSONLibrary
+
+
+
+*** Variables ***
+${Base_URL}  https://datausa.io/api/data
+#${Base_URL} =  https://lmsmanager-test.colorado.edu/LMSManager/rest/queries/bsoCoursesCreatedInLms
+${drilldowns} =     Nation
+${measures} =   Population
+
+#@{ALLOWED}=  Create List  /208235  /208231  /208229
+
+*** Keywords ***
+
+
+
+
+*** Test Cases ***
+TC_01_Get Request
+    create session  get_course_details     ${Base_URL}
+    @{valid_activity_type}=    Create List  Population  Year  Nation
+
+    ${listlen}=  get length  ${valid_activity_type}
+    log to console  ${listlen}
+    FOR    ${item}   IN RANGE   0    ${listlen}
+      ${response}=     get request     get_course_details     ?drilldowns=${drilldowns}&measures=${valid_activity_type}[${item}]
+      log to console     ${response.content}
+      ${json_obj} =  to json  ${response.content}
+      ${response_count}=  Get Length  ${json_obj}
+      FOR   ${item}   IN RANGE   0    ${response_count}
+
+          ${section_id} =  convert to string  (${json_obj}[${item}])
+          log to console  ${section_id}
+      END
+     END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
